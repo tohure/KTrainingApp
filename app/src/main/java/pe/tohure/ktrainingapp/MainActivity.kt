@@ -1,5 +1,6 @@
 package pe.tohure.ktrainingapp
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -16,6 +17,11 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         //config Recycler
         rcvList.layoutManager = GridLayoutManager(this,2)
-        rcvList.adapter = ItemAdapter(getItems())
+        rcvList.adapter = ItemAdapter(getItems()){
+            val intent = Intent(this,DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_ID,it.id)
+            startActivity(intent)
+        }
+
     }
 }

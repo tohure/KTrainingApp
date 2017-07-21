@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_row.view.*
 /**
  * Created by crhto on 20/07/2017.
  */
-class ItemAdapter(val items: List<Item>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(val items: List<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         /*val v = LayoutInflater.from(parent.context).inflate(R.layout.item_row,parent,false)
@@ -33,10 +33,12 @@ class ItemAdapter(val items: List<Item>) : RecyclerView.Adapter<ItemAdapter.View
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
         lblItem.text = items[position].title
         imgItem.loadUrl(items[position].url)
+        setOnClickListener {
+            listener(items[position])
+        }
     }
 
     override fun getItemCount() = items.size
-
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
